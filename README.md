@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# 🎮 Glitch Sports Trivia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A weird sports trivia game featuring obscure and "cursed" facts from NFL, NBA, MLB, and NHL history.
 
-Currently, two official plugins are available:
+## 🚀 Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Install dependencies
+npm install
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run the app (starts both frontend + API)
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open **http://localhost:5173** in your browser!
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📝 Managing Questions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Questions are stored in a **Neon PostgreSQL database**. Add new questions via the Neon SQL Editor:
+
+```sql
+-- Single answer question
+INSERT INTO questions (text, correct_answer, answer_variants, sport_type, difficulty) 
+VALUES (
+  'Which NBA player scored 100 points in a single game?', 
+  'Wilt Chamberlain', 
+  ARRAY['Wilt', 'Chamberlain'], 
+  'NBA', 
+  'easy'
+);
+
+-- Multi-answer question (8 boxes)
+INSERT INTO questions (text, correct_answer, answer_variants, sport_type, difficulty, question_type, required_answers) 
+VALUES (
+  'Name the 8 teams that appeared in the Super Bowl since 2018',
+  'Patriots',
+  ARRAY['Patriots', 'Rams', 'Chiefs', '49ers', 'Buccaneers', 'Bengals', 'Eagles', 'Chiefs'],
+  'NFL',
+  'hard',
+  'multi',
+  8
+);
 ```
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React + TypeScript + Vite + Tailwind CSS
+- **Backend**: Express.js API
+- **Database**: Neon (Serverless PostgreSQL)
+- **Animations**: Framer Motion
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── components/
+│   │   └── TriviaArena.tsx    # Main game component
+│   └── hooks/
+│       ├── useQuestions.ts    # Fetches questions from API
+│       └── useGameAudio.ts    # Sound effects
+├── server.mjs                 # Express API server
+├── schema.sql                 # Database schema
+└── .env                       # Database connection (not in repo)
+```
+
+## 🔐 Environment Variables
+
+Create a `.env` file with your Neon connection string:
+
+```
+DATABASE_URL=postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require
+```
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Run frontend + API together |
+| `npm run dev` | Run frontend only |
+| `npm run server` | Run API only |
+| `node sql.mjs "SQL"` | Run raw SQL queries |
+
+---
+
+Built with a love for weird sports facts
