@@ -6,7 +6,7 @@ async function verifyData() {
 
     console.log('📊 Checking database tables...\n');
 
-    const questions = await sql`SELECT id, text, sport_type, correct_answer FROM questions`;
+    const questions = await sql`SELECT id, question, sport_type, correct_answer FROM questions`;
     console.log('Questions Table:');
     console.table(questions);
 

@@ -20,23 +20,21 @@ Questions are stored in a **Neon PostgreSQL database**. Add new questions via th
 
 ```sql
 -- Single answer question
-INSERT INTO questions (text, correct_answer, answer_variants, sport_type, difficulty) 
+INSERT INTO questions (question, correct_answer, answer_variants, sport_type) 
 VALUES (
   'Which NBA player scored 100 points in a single game?', 
   'Wilt Chamberlain', 
   ARRAY['Wilt', 'Chamberlain'], 
-  'NBA', 
-  'easy'
+  'NBA'
 );
 
 -- Multi-answer question (8 boxes)
-INSERT INTO questions (text, correct_answer, answer_variants, sport_type, difficulty, question_type, required_answers) 
+INSERT INTO questions (question, correct_answer, answer_variants, sport_type, question_type, required_answers) 
 VALUES (
-  'Name the 8 teams that appeared in the Super Bowl since 2018',
+  'Name the 8 teams that appeared in the Super Bowl since 2018 (Inlcuding 2018 & 2026)',
   'Patriots',
   ARRAY['Patriots', 'Rams', 'Chiefs', '49ers', 'Buccaneers', 'Bengals', 'Eagles', 'Chiefs'],
   'NFL',
-  'hard',
   'multi',
   8
 );

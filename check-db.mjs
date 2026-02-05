@@ -16,12 +16,12 @@ if (tables.length === 0) {
 }
 
 // Check questions
-const questions = await sql`SELECT id, sport_type, text, correct_answer FROM questions`;
+const questions = await sql`SELECT id, sport_type, question, correct_answer FROM questions`;
 console.log(`📊 Questions in database: ${questions.length}\n`);
 
 if (questions.length > 0) {
     questions.forEach((q, i) => {
-        console.log(`${i + 1}. [${q.sport_type}] ${q.text}`);
+        console.log(`${i + 1}. [${q.sport_type}] ${q.question}`);
         console.log(`   Answer: ${q.correct_answer}\n`);
     });
 } else {

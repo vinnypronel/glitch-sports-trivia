@@ -32,7 +32,7 @@ app.get('/api/questions', async (req, res) => {
         let result;
         if (sport && sport !== 'ALL') {
             result = await sql`
-        SELECT id, text, correct_answer, answer_variants, sport_type, difficulty, question_type, required_answers
+        SELECT id, question, correct_answer, answer_variants, sport_type, question_type, required_answers
         FROM questions 
         WHERE sport_type = ${sport}
         ORDER BY RANDOM()
@@ -40,7 +40,7 @@ app.get('/api/questions', async (req, res) => {
       `;
         } else {
             result = await sql`
-        SELECT id, text, correct_answer, answer_variants, sport_type, difficulty, question_type, required_answers
+        SELECT id, question, correct_answer, answer_variants, sport_type, question_type, required_answers
         FROM questions 
         ORDER BY RANDOM()
         LIMIT ${parseInt(limit)}

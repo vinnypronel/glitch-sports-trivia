@@ -3,12 +3,12 @@
 -- Questions Table
 CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
-    text TEXT NOT NULL,
+    question TEXT NOT NULL,
     correct_answer TEXT NOT NULL,
     answer_variants TEXT[],
     sport_type VARCHAR(50) NOT NULL,
-    difficulty VARCHAR(20) CHECK (difficulty IN ('easy', 'medium', 'hard')),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    question_type VARCHAR(20) DEFAULT 'single',
+    required_answers INTEGER DEFAULT 1
 );
 
 -- UserStats Table
@@ -31,12 +31,3 @@ CREATE TABLE game_logs (
     time_taken INTEGER,
     attempted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-
--- Sample Data
-INSERT INTO questions (text, correct_answer, answer_variants, sport_type, difficulty) VALUES
-('Which NFL team is the only franchise with a logo that faces left?', 'Philadelphia Eagles', ARRAY['Eagles', 'The Philadelphia Eagles', 'Philly Eagles'], 'NFL', 'medium'),
-('Gaylord Perry hit his only career home run on the exact same day that which man walked on the moon?', 'Neil Armstrong', ARRAY['Armstrong'], 'MLB', 'hard'),
-('In 1961, Wilt Chamberlain set an unbreakable record by averaging how many minutes per game?', '48.5', ARRAY['48.5 minutes', '48.5 mins'], 'NBA', 'medium'),
-('The Stanley Cup features several misspellings; which team is famously spelled as BQSTQN BRUINS?', 'Boston Bruins', ARRAY['Bruins', 'The Boston Bruins'], 'NHL', 'hard'),
-('What is the only MLB team that does not have the city name on their home or road jerseys?', 'Los Angeles Angels', ARRAY['Angels'], 'MLB', 'medium'),
-('In 1987, which NFL team technically won their division despite using replacement players during a strike?', 'Washington Redskins', ARRAY['Redskins', 'Washington Commanders'], 'NFL', 'hard');

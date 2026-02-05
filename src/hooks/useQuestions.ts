@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 
 export interface Question {
     id: number;
-    text: string;
+    question: string;
     correct_answer: string;
     answer_variants: string[];
     sport_type: string;
-    difficulty: 'easy' | 'medium' | 'hard';
     question_type: 'single' | 'multi';
     required_answers: number;
 }

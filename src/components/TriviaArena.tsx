@@ -327,7 +327,7 @@ const TriviaArena: React.FC = () => {
                             )}
                         </div>
                         <p className="text-3xl font-bold mt-2 leading-tight">
-                            {currentQuestion.text}
+                            {currentQuestion.question}
                         </p>
                     </div>
 
