@@ -1,8 +1,8 @@
-# 🎮 Glitch Sports Trivia
+# Glitch Sports Trivia
 
 A weird sports trivia game featuring obscure and "cursed" facts from NFL, NBA, MLB, and NHL history.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -12,9 +12,9 @@ npm install
 npm start
 ```
 
-Then open **http://localhost:5173** in your browser!
+Then open **http://localhost:5173** in your browser.
 
-## 📝 Managing Questions
+## Managing Questions
 
 Questions are stored in a **Neon PostgreSQL database**. Add new questions via the Neon SQL Editor:
 
@@ -31,7 +31,7 @@ VALUES (
 -- Multi-answer question (8 boxes)
 INSERT INTO questions (question, correct_answer, answer_variants, sport_type, question_type, required_answers) 
 VALUES (
-  'Name the 8 teams that appeared in the Super Bowl since 2018 (Inlcuding 2018 & 2026)',
+  'Name the 8 teams that appeared in the Super Bowl since 2018 (Including 2018 & 2026)',
   'Patriots',
   ARRAY['Patriots', 'Rams', 'Chiefs', '49ers', 'Buccaneers', 'Bengals', 'Eagles', 'Chiefs'],
   'NFL',
@@ -40,14 +40,14 @@ VALUES (
 );
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: React + TypeScript + Vite + Tailwind CSS
 - **Backend**: Express.js API
 - **Database**: Neon (Serverless PostgreSQL)
 - **Animations**: Framer Motion
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── src/
@@ -61,7 +61,7 @@ VALUES (
 └── .env                       # Database connection (not in repo)
 ```
 
-## 🔐 Environment Variables
+## Environment Variables
 
 Create a `.env` file with your Neon connection string:
 
@@ -69,7 +69,7 @@ Create a `.env` file with your Neon connection string:
 DATABASE_URL=postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require
 ```
 
-## 📜 Available Scripts
+## Available Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -78,6 +78,6 @@ DATABASE_URL=postgresql://user:password@endpoint.neon.tech/neondb?sslmode=requir
 | `npm run server` | Run API only |
 | `node sql.mjs "SQL"` | Run raw SQL queries |
 
----
+## License
 
-Built with a love for weird sports facts
+MIT. See [LICENSE](LICENSE).
